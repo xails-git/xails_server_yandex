@@ -14,16 +14,24 @@ import (
 )
 
 func ReturnHTML(w http.ResponseWriter, r *http.Request) {
-	// Читаем index.html из текущей директории
-	data, err := os.ReadFile("../index.html")
+	// Получаем текущую рабочую директорию
+	wd, err := os.Getwd()
 	if err != nil {
-		log.Printf("Ошибка чтения index.html: %v", err)
+		log.Printf("Ошибка получения рабочей директории: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	// Формируем абсолютный путь к index.html
+	indexPath := filepath.Join(wd, "index.html")
+	data, err := os.ReadFile(indexPath)
+	if err != nil {
+		log.Printf("Ошибка чтения %s: %v", indexPath, err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.WriteHeader(http.StatusOK)
 	w.Write(data)
 }
 
