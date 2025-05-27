@@ -15,7 +15,7 @@ import (
 
 func ReturnHTML(w http.ResponseWriter, r *http.Request) {
 	// Читаем index.html из текущей директории
-	data, err := os.ReadFile("../finalTaskSprint6_3/index.html")
+	data, err := os.ReadFile("../index.html")
 	if err != nil {
 		log.Printf("Ошибка чтения index.html: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
