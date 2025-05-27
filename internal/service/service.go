@@ -15,7 +15,7 @@ func AutoConvert(input string) (string, error) {
 		return "", fmt.Errorf("empty input")
 	}
 
-	// Проверка на Morse code (допускаем любые комбинации . - / и пробелов)
+	// Проверка
 	if isMorse(input) {
 		text := morse.ToText(input)
 		if text == "" {
@@ -24,7 +24,7 @@ func AutoConvert(input string) (string, error) {
 		return text, nil
 	}
 
-	// Конвертация текста в верхний регистр
+	// Конвертация
 	morseCode := morse.ToMorse(strings.ToUpper(input))
 	if morseCode == "" {
 		return "", fmt.Errorf("invalid text")

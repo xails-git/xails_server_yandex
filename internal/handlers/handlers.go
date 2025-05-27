@@ -38,7 +38,6 @@ func ReturnHTML(w http.ResponseWriter, r *http.Request) {
 func ConvertStr(w http.ResponseWriter, r *http.Request) {
 	const maxMemory = 32 << 20 // 32MB
 
-	// Принимаем только POST-запросы
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
@@ -51,7 +50,6 @@ func ConvertStr(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Получаем файл из поля "myFile" (как в автотесте)
 	file, header, err := r.FormFile("myFile")
 	if err != nil {
 		log.Printf("Файл не найден: %v", err)
